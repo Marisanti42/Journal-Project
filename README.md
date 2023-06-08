@@ -1,2 +1,2 @@
-# Journal-Project
-A private journaling application.
+# Notebook-Project
+A private notebook application.
