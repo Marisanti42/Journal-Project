@@ -1,0 +1,5 @@
+Notebook Website
+
+Users can create entries from the homepage that can be used for journaling, lists, notes, etc. Users can edit and delete their own posts, as well as view all of them on their page. All pages are login protected.
+
+https://github.com/Marisanti42/Notebook-Projects

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body class="p-3">
+<!--Nav Bar-->
+    <div class="navbar d-flex justify-content-between">
+        <div class="d-flex flex-column pe-3">
+            <div class="d-flex flex-row">
+                <a class="mt-2" href="/user/account/{{id}}">My Notebook</a>
+                <h2 class="row ms-4">Welcome, {{first_name}}!</h2>
+            </div>
+            <div class="d-flex flex-row me-5 justify-content-end">
+                <a class="btn btn-outline-primary btn-sm" href="/entry/new">New Entry</a>
+                <a class="btn btn-outline-danger btn-sm ms-3" href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+<!--Entry Section-->
+    <div class="d-flex flex-column justify-content-between m-5 w-auto">
+        <h2 class="mb-3">{{entry.title}} added by {{entry.owner.first_name}} {{entry.owner.last_name}}</h2>
+        <p class="fw-semibold">Last Updated: {{entry.updated_at.strftime('%H:%M %p %B %d, %Y')}}</p>
+        <p class="fw-semibold">{{entry.content}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
