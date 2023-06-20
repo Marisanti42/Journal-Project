@@ -89,10 +89,8 @@ class Entry:
     def update_entry(cls,data):
         query = """UPDATE entries SET
         title = %(title)s,
-        content = %(content)s,
-        updated_at = %(updated_at)s
-        WHERE id = %(id)s
-        AND entry.user_id = %(user_id)s;"""
+        content = %(content)s
+        WHERE id = %(id)s AND entries.user_id = %(user_id)s;"""
         results = connectToMySQL(cls.db).query_db(query, data)
         return results
     

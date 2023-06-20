@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, session
-from flask_app.models import entry_model
+from flask_app.models.entry_model import Entry
 from flask_app import app
 
 #Add a entry route
@@ -16,17 +16,16 @@ def new_entry():
 def add_entry():
     if "user_id" not in session:
         return redirect("/")
-    is_valid = entry_model.Entry.validate_entry(request.form)
+    is_valid = Entry.validate_entry(request.form)
     if not is_valid:
         return redirect("/entry/new")
     else:
         data = {
             'title':request.form["title"],
             'content':request.form["content"],
-            'user_id':session["user_id"]
+            'user_id':session["user_id"],
         }
-        id = entry_model.Entry.new_entry(data)
-        entry_model.Entry.new_entry(data)
+        id = Entry.new_entry(data)
         return redirect(f"/show/{id}")
 
 #View a specific entry route 
@@ -35,7 +34,7 @@ def show_entry(id):
     if "user_id" not in session:
         return redirect("/")
     first_name = session["first_name"]
-    this_entry = entry_model.Entry.view_entry(id)
+    this_entry = Entry.view_entry(id)
     id = session["user_id"]
     return render_template("show_entry.html", first_name=first_name, entry=this_entry, id=id)
 
@@ -45,7 +44,7 @@ def edit_entry(id):
     if 'user_id' not in session:
         return redirect("/")
     first_name = session["first_name"]
-    entry = entry_model.Entry.view_entry(id)
+    entry = Entry.view_entry(id)
     id = session["user_id"]
     return render_template("edit_entry.html", entry=entry, first_name=first_name, id=id)
 
@@ -54,18 +53,17 @@ def edit_entry(id):
 def update_entry(id):
     if 'user_id' not in session:
         return redirect("/")
-    is_valid = entry_model.Entry.validate_entry(request.form)
+    is_valid = Entry.validate_entry(request.form)
     if not is_valid:
         return redirect(f"/edit/{id}")
     else:
         data = {
             'title':request.form["title"],
             'content':request.form["content"],
-            'updated_at':request.form["updated_at"],
             'user_id':session["user_id"],
             'id':id
         }
-        entry_model.Entry.update_entry(data)
+        Entry.update_entry(data)
         return redirect(f"/show/{id}")
 
 #Delete a entry route
@@ -73,5 +71,5 @@ def update_entry(id):
 def delete_entry(id):
     if 'user_id' not in session:
         return redirect("/")
-    entry_model.Entry.delete_entry(id)
+    Entry.delete_entry(id)
     return redirect(f"/user/account/{id}")
