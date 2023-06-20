@@ -28,7 +28,7 @@ def submit():
         print(f"THIS IS THE ID: {id}")
         session['user_id'] = id                             #Session ID Register
         session['first_name'] = request.form["first_name"]
-        return redirect(f"/user/account/{id}")
+        return redirect("entry/new")
     else:
         is_valid = user_model.User.validate_login(request.form)
         if not is_valid:
